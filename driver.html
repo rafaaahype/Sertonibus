@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sertonibus - Painel do Motorista</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-100">
+    <header class="bg-gray-800 text-white p-4 shadow">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold flex items-center gap-2">🚌 Sertonibus 🌵 | Motorista</h1>
+            <div class="text-sm font-medium">
+                <span id="user-display" class="mr-4 text-yellow-400"></span>
+                <button id="btn-logout" class="underline hover:text-gray-300">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-4 mt-6 space-y-6">
+        <div class="bg-white p-6 rounded-lg shadow border-t-4 border-yellow-500">
+            <h2 class="text-2xl font-bold mb-4">Gerenciar Turno</h2>
+            <div class="flex flex-col md:flex-row gap-4">
+                <select id="filter-day" class="border rounded p-2 flex-1 outline-none">
+                    <option value="Segunda-feira">Segunda-feira</option>
+                    <option value="Terça-feira">Terça-feira</option>
+                    <option value="Quarta-feira">Quarta-feira</option>
+                    <option value="Quinta-feira">Quinta-feira</option>
+                    <option value="Sexta-feira">Sexta-feira</option>
+                </select>
+                <select id="filter-time" class="border rounded p-2 flex-1 outline-none">
+                    <option value="Manhã (07:00)">Manhã (07:00)</option>
+                    <option value="Tarde (13:00)">Tarde (13:00)</option>
+                    <option value="Noite (18:30)">Noite (18:30)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="alert-extra-bus" class="hidden bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded shadow">
+            <p class="font-bold">Capacidade máxima excedida!</p>
+            <p class="text-sm">O sistema já requisitou um novo motorista e um ônibus extra para a rota.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- Ônibus Principal -->
+            <div class="bg-white p-4 rounded-lg shadow border border-gray-200">
+                <h3 class="font-bold bg-blue-100 text-blue-800 p-2 rounded text-center mb-1">Ônibus 1 (Principal)</h3>
+                <p class="text-xs text-center text-gray-500 mb-3">Capacidade: 5 Vagas</p>
+                <ul id="bus1-list" class="divide-y space-y-1"></ul>
+            </div>
+            
+            <!-- Ônibus Extra -->
+            <div id="bus2-container" class="hidden bg-white p-4 rounded-lg shadow border border-red-200">
+                <h3 class="font-bold bg-red-100 text-red-800 p-2 rounded text-center mb-1">Ônibus 2 (Reforço)</h3>
+                <p class="text-xs text-center text-gray-500 mb-3">Alocados devido a excedente</p>
+                <ul id="bus2-list" class="divide-y space-y-1"></ul>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/database.js"></script>
+    <script src="js/driver.js"></script>
+</body>
+</html>
+

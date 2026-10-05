@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sertonibus - Cadastro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+        <h2 class="text-2xl font-bold text-center mb-6">Novo Cadastro</h2>
+        <form id="form-register" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium">Nome Completo</label>
+                <input type="text" id="name" required class="w-full border rounded p-2 outline-none focus:border-green-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium">Nome de Usuário (Login)</label>
+                <input type="text" id="username" required class="w-full border rounded p-2 outline-none focus:border-green-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium">Senha</label>
+                <input type="password" id="password" required class="w-full border rounded p-2 outline-none focus:border-green-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium">Perfil</label>
+                <select id="role" class="w-full border rounded p-2 outline-none focus:border-green-500">
+                    <option value="student">Estudante (Vou viajar)</option>
+                    <option value="driver">Motorista (Vou dirigir)</option>
+                </select>
+            </div>
+            <button type="submit" class="w-full bg-green-500 text-white font-bold py-2 rounded hover:bg-green-600">Cadastrar</button>
+        </form>
+        <div class="mt-4 text-center">
+            <a href="index.html" class="text-sm text-gray-500 hover:text-blue-500 underline">Voltar ao Menu</a>
+        </div>
+    </div>
+    <!-- Scripts separados por responsabilidade -->
+    <script src="js/database.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
+
