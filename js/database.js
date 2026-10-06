@@ -17,7 +17,7 @@ const MAX_CAPACITY = 5;
 // Código exigido para criar uma conta de motorista (troque por um valor seu).
 // Atenção: como o projeto roda só no navegador, esse código fica visível no código-fonte.
 // Ele impede cadastros por engano ou curiosidade, mas não é segurança de verdade (isso exige um servidor).
-const DRIVER_ACCESS_CODE = 'SERTONIBUS-MOTORISTA';
+const DRIVER_ACCESS_CODE = '123';
 
 const DB = {
     // Retorna todos os usuários cadastrados
