@@ -555,3 +555,1879 @@ html {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* ===== SERTONIBUS VISUAL REFRESH ===== */
+:root {
+    --bg: #f3f7f5;
+    --surface: #ffffff;
+    --surface-alt: #f7faf8;
+    --ink: #14221d;
+    --ink-soft: #385048;
+    --muted: #6c7d76;
+    --faint: #91a09a;
+    --line: #dfe9e4;
+    --line-strong: #c9d9d2;
+    --primary: #0f766e;
+    --primary-hover: #0b5f59;
+    --primary-soft: #e4f4f1;
+    --primary-line: #b9ddd7;
+    --accent: #f59e0b;
+    --accent-soft: #fff4d9;
+    --danger: #dc4c3f;
+    --danger-ink: #a7352c;
+    --danger-soft: #fff0ee;
+    --danger-line: #f3cbc6;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-sm: 11px;
+    --shadow-card: 0 12px 35px -20px rgba(15, 65, 58, .28), 0 2px 7px rgba(15, 65, 58, .06);
+    --ring: 0 0 0 4px rgba(15, 118, 110, .15);
+}
+
+:root body {
+    background:
+        radial-gradient(700px 320px at 8% -5%, rgba(15,118,110,.13), transparent 65%),
+        radial-gradient(600px 300px at 95% 0%, rgba(245,158,11,.12), transparent 62%),
+        var(--bg);
+}
+
+:root body header {
+    background: rgba(255,255,255,.9);
+    border-bottom: 1px solid rgba(201,217,210,.8);
+    box-shadow: 0 10px 30px -24px rgba(15,65,58,.5);
+}
+
+:root body header h1 {
+    font-size: 1.15rem;
+    letter-spacing: -.02em;
+}
+
+:root body header h1::before {
+    content: "🚌";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    margin-right: .55rem;
+    border-radius: 10px;
+    background: var(--primary-soft);
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+:root body .bg-white {
+    border-radius: var(--radius-lg);
+    box-shadow: 0 0 0 1px rgba(223,233,228,.9), var(--shadow-card);
+}
+
+:root body main {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+:root body main > .grid > .bg-white,
+:root body main > .bg-white {
+    overflow: hidden;
+}
+
+:root body main > .grid > .bg-white::before,
+:root body main > .bg-white::before {
+    content: "";
+    display: block;
+    height: 4px;
+    margin: -1.5rem -1.5rem 1.25rem;
+    background: linear-gradient(90deg, var(--primary), #22a699 58%, var(--accent));
+}
+
+:root body .max-w-sm.bg-white {
+    position: relative;
+    overflow: hidden;
+}
+
+:root body .max-w-sm.bg-white::after {
+    content: "SERTONIBUS";
+    position: absolute;
+    right: -1.5rem;
+    top: 1.4rem;
+    transform: rotate(12deg);
+    color: rgba(15,118,110,.055);
+    font-size: 2.7rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    pointer-events: none;
+}
+
+:root body button[type="submit"],
+:root body button.bg-blue-600,
+:root body button.bg-green-500,
+:root body button.bg-green-600,
+:root body a.bg-blue-600 {
+    background: linear-gradient(135deg, var(--primary), #15968c);
+    border-color: var(--primary);
+    border-radius: 12px;
+    box-shadow: 0 10px 22px -14px rgba(15,118,110,.9);
+}
+
+:root body button[type="submit"]:hover,
+:root body button.bg-blue-600:hover,
+:root body button.bg-green-500:hover,
+:root body button.bg-green-600:hover,
+:root body a.bg-blue-600:hover {
+    background: linear-gradient(135deg, var(--primary-hover), #0f766e);
+    box-shadow: 0 13px 25px -14px rgba(15,118,110,1);
+    transform: translateY(-1px);
+}
+
+:root body input,
+:root body select,
+:root body textarea {
+    min-height: 3.1rem;
+    border-radius: 12px;
+    background: #fbfdfc;
+}
+
+:root body input:focus,
+:root body select:focus,
+:root body textarea:focus {
+    border-color: var(--primary);
+    box-shadow: var(--ring);
+    background: #fff;
+}
+
+:root body #btn-profile {
+    padding: .5rem .9rem;
+    color: var(--primary);
+    background: var(--primary-soft);
+    border: 1px solid var(--primary-line);
+    border-radius: 999px;
+    font-weight: 700;
+    transition: .2s ease;
+}
+
+:root body #btn-profile:hover {
+    background: #d7eee9;
+    transform: translateY(-1px);
+}
+
+:root body #btn-logout {
+    border-radius: 999px;
+    background: #fff;
+}
+
+:root body #driver-preview-card {
+    border: 1px solid var(--primary-line) !important;
+    background: linear-gradient(135deg, #f0faf8, #f9fcfb) !important;
+    border-radius: 16px;
+    box-shadow: 0 8px 22px -18px rgba(15,118,110,.5);
+}
+
+:root body #driver-preview-card::before {
+    content: "🧑‍✈️";
+    float: right;
+    font-size: 1.6rem;
+}
+
+:root body #btn-view-driver {
+    border-radius: 999px;
+    box-shadow: 0 6px 14px -10px rgba(15,118,110,.8);
+}
+
+:root body #my-bookings-list > li {
+    background: linear-gradient(135deg, #ffffff, #f7faf8);
+    border: 1px solid var(--line);
+    box-shadow: 0 5px 16px -13px rgba(15,65,58,.35);
+}
+
+:root body #bus1-list > li,
+:root body #bus2-list > li {
+    border-radius: 10px;
+    transition: background .15s ease, transform .15s ease;
+}
+
+:root body #bus1-list > li:hover,
+:root body #bus2-list > li:hover {
+    background: var(--surface-alt);
+    transform: translateX(2px);
+}
+
+:root body #bus1-list > li > span:last-child,
+:root body #bus2-list > li > span:last-child {
+    color: var(--primary);
+    background: var(--primary-soft);
+}
+
+:root body .bg-blue-100 {
+    background: var(--primary-soft) !important;
+}
+
+:root body .bg-yellow-100 {
+    background: var(--accent-soft) !important;
+}
+
+:root body .border-blue-200 {
+    border-color: var(--primary-line) !important;
+}
+
+:root body .border-yellow-200 {
+    border-color: #f4d99d !important;
+}
+
+:root body #public-profile-modal > div,
+:root body #profile-modal > div {
+    border-radius: 22px;
+    box-shadow: 0 30px 70px -30px rgba(0,0,0,.45);
+}
+
+:root body #public-profile-photo,
+:root body #profile-photo-preview,
+:root body #profile-photo-placeholder,
+:root body #public-profile-placeholder {
+    box-shadow: 0 10px 25px -15px rgba(15,65,58,.5);
+}
+
+:root body .bg-black\/50 {
+    background: rgba(9,25,21,.55);
+    backdrop-filter: blur(4px);
+}
+
+@media (max-width: 640px) {
+    :root body header {
+        padding: .7rem .8rem;
+    }
+
+    :root body header > div {
+        gap: .45rem;
+    }
+
+    :root body header h1::before {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+
+    :root body main > .grid > .bg-white::before,
+    :root body main > .bg-white::before {
+        margin-left: -1.25rem;
+        margin-right: -1.25rem;
+        margin-top: -1.25rem;
+    }
+}
+
+/* ===== SERTONIBUS — MODERN FADE UI ===== */
+:root {
+    --modern-ink: #17221f;
+    --modern-muted: #697873;
+    --modern-line: rgba(24, 54, 47, .10);
+    --modern-green: #176b5f;
+    --modern-green-dark: #105249;
+    --modern-bg: #eef3f1;
+}
+
+html {
+    background: #eef3f1;
+}
+
+:root body {
+    color: var(--modern-ink);
+    background:
+        radial-gradient(900px 520px at 0% 0%, rgba(63, 151, 132, .24), transparent 68%),
+        radial-gradient(760px 480px at 100% 8%, rgba(210, 224, 219, .85), transparent 70%),
+        linear-gradient(145deg, #eef4f1 0%, #f6f8f7 48%, #e8efec 100%);
+    background-attachment: fixed;
+}
+
+:root body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        linear-gradient(115deg, transparent 0 35%, rgba(255,255,255,.32) 50%, transparent 65%);
+    opacity: .7;
+}
+
+:root body header {
+    background: rgba(255,255,255,.68);
+    border-bottom: 1px solid rgba(24,54,47,.09);
+    box-shadow: 0 8px 30px rgba(24,54,47,.05);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+:root body header h1 {
+    font-weight: 700;
+    letter-spacing: -.035em;
+}
+
+:root body header h1::before {
+    display: none;
+}
+
+:root body main {
+    max-width: 1080px;
+}
+
+:root body .bg-white {
+    background: rgba(255,255,255,.82);
+    border: 1px solid rgba(255,255,255,.88);
+    border-radius: 16px;
+    box-shadow:
+        0 20px 55px rgba(28, 58, 51, .075),
+        0 2px 8px rgba(28, 58, 51, .035);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+:root body main > .grid > .bg-white::before,
+:root body main > .bg-white::before {
+    display: none;
+}
+
+:root body .max-w-sm.bg-white::after {
+    display: none;
+}
+
+:root body h1,
+:root body h2,
+:root body h3 {
+    letter-spacing: -.025em;
+}
+
+:root body label {
+    color: #52625d;
+    font-weight: 600;
+}
+
+:root body input,
+:root body select,
+:root body textarea {
+    min-height: 2.9rem;
+    border: 1px solid var(--modern-line);
+    border-radius: 10px;
+    background: rgba(248,251,250,.82);
+    color: var(--modern-ink);
+    box-shadow: inset 0 1px 1px rgba(20,50,43,.025);
+}
+
+:root body input:hover,
+:root body select:hover,
+:root body textarea:hover {
+    border-color: rgba(23,107,95,.24);
+}
+
+:root body input:focus,
+:root body select:focus,
+:root body textarea:focus {
+    border-color: rgba(23,107,95,.55);
+    box-shadow: 0 0 0 3px rgba(23,107,95,.10);
+    background: #fff;
+}
+
+:root body button[type="submit"],
+:root body button.bg-blue-600,
+:root body button.bg-green-500,
+:root body button.bg-green-600,
+:root body a.bg-blue-600 {
+    background: var(--modern-green);
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 7px 18px rgba(23,107,95,.18);
+    transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+}
+
+:root body button[type="submit"]:hover,
+:root body button.bg-blue-600:hover,
+:root body button.bg-green-500:hover,
+:root body button.bg-green-600:hover,
+:root body a.bg-blue-600:hover {
+    background: var(--modern-green-dark);
+    box-shadow: 0 10px 22px rgba(23,107,95,.22);
+    transform: translateY(-1px);
+}
+
+:root body #btn-profile {
+    color: var(--modern-green);
+    background: rgba(23,107,95,.07);
+    border: 1px solid rgba(23,107,95,.13);
+    border-radius: 9px;
+    box-shadow: none;
+}
+
+:root body #btn-profile:hover {
+    background: rgba(23,107,95,.12);
+}
+
+:root body #btn-logout {
+    border-radius: 9px;
+}
+
+:root body #driver-preview-card {
+    position: relative;
+    border: 1px solid rgba(23,107,95,.12) !important;
+    background:
+        linear-gradient(110deg, rgba(233,245,241,.92), rgba(250,252,251,.72)) !important;
+    border-radius: 13px;
+    box-shadow: none;
+}
+
+:root body #driver-preview-card::before {
+    display: none;
+}
+
+:root body #btn-view-driver {
+    background: transparent;
+    color: var(--modern-green);
+    border: 1px solid rgba(23,107,95,.20);
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+:root body #btn-view-driver:hover {
+    background: rgba(23,107,95,.08);
+    transform: none;
+}
+
+:root body #my-bookings-list > li {
+    background: rgba(255,255,255,.58);
+    border: 1px solid var(--modern-line);
+    border-radius: 11px;
+    box-shadow: none;
+}
+
+:root body #bus1-list > li,
+:root body #bus2-list > li {
+    border-radius: 9px;
+}
+
+:root body #bus1-list > li:hover,
+:root body #bus2-list > li:hover {
+    background: rgba(23,107,95,.045);
+    transform: none;
+}
+
+:root body #bus1-list > li > span:last-child,
+:root body #bus2-list > li > span:last-child {
+    color: var(--modern-green);
+    background: rgba(23,107,95,.07);
+}
+
+:root body .bg-blue-100 {
+    background: rgba(23,107,95,.075) !important;
+}
+
+:root body .bg-yellow-100 {
+    background: rgba(205,154,44,.10) !important;
+}
+
+:root body .border-blue-200 {
+    border-color: rgba(23,107,95,.14) !important;
+}
+
+:root body .border-yellow-200 {
+    border-color: rgba(205,154,44,.20) !important;
+}
+
+:root body #public-profile-modal > div,
+:root body #profile-modal > div {
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.8);
+    box-shadow: 0 28px 70px rgba(15,35,30,.20);
+}
+
+:root body #public-profile-photo,
+:root body #profile-photo-preview,
+:root body #profile-photo-placeholder,
+:root body #public-profile-placeholder {
+    box-shadow: 0 8px 24px rgba(20,55,47,.12);
+}
+
+:root body .bg-black\/50 {
+    background: rgba(12, 28, 24, .42);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+@media (max-width: 640px) {
+    :root body {
+        background:
+            radial-gradient(520px 340px at 0% 0%, rgba(63,151,132,.18), transparent 70%),
+            linear-gradient(145deg, #eef4f1, #f7f9f8);
+    }
+
+    :root body .bg-white {
+        border-radius: 14px;
+    }
+}
+
+/* ===== SERTONIBUS — MICRO INTERACTIONS ===== */
+:root body a,
+:root body button,
+:root body select,
+:root body input,
+:root body textarea,
+:root body #my-bookings-list > li,
+:root body #bus1-list > li,
+:root body #bus2-list > li {
+    transition:
+        transform .18s cubic-bezier(.2,.8,.2,1),
+        box-shadow .18s ease,
+        background-color .18s ease,
+        border-color .18s ease,
+        color .18s ease;
+}
+
+:root body a:hover,
+:root body button:hover {
+    transform: scale(1.025);
+}
+
+:root body button:active,
+:root body a:active {
+    transform: scale(.985);
+}
+
+:root body input:hover,
+:root body select:hover,
+:root body textarea:hover {
+    transform: scale(1.008);
+}
+
+:root body #my-bookings-list > li:hover {
+    transform: translateY(-2px) scale(1.008);
+    box-shadow: 0 9px 24px rgba(28,58,51,.08);
+}
+
+:root body #bus1-list > li:hover,
+:root body #bus2-list > li:hover {
+    transform: translateX(3px) scale(1.008);
+}
+
+:root body #btn-profile:hover {
+    transform: scale(1.035);
+}
+
+:root body #btn-logout:hover {
+    transform: scale(1.025);
+}
+
+/* Entrada suave dos modais */
+@keyframes sertonibus-overlay-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes sertonibus-modal-in {
+    from {
+        opacity: 0;
+        transform: translateY(16px) scale(.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+:root body #profile-modal:not(.hidden),
+:root body #public-profile-modal:not(.hidden) {
+    animation: sertonibus-overlay-in .2s ease-out both;
+}
+
+:root body #profile-modal:not(.hidden) > div,
+:root body #public-profile-modal:not(.hidden) > div {
+    animation: sertonibus-modal-in .26s cubic-bezier(.2,.8,.2,1) both;
+    transform-origin: center center;
+}
+
+/* Pequena animação de entrada dos cards principais */
+@keyframes sertonibus-card-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+:root body main > .bg-white,
+:root body main > .grid > .bg-white {
+    animation: sertonibus-card-in .35s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root body a,
+    :root body button,
+    :root body select,
+    :root body input,
+    :root body textarea,
+    :root body #my-bookings-list > li,
+    :root body #bus1-list > li,
+    :root body #bus2-list > li {
+        transition: none !important;
+    }
+
+    :root body a:hover,
+    :root body button:hover,
+    :root body input:hover,
+    :root body select:hover,
+    :root body textarea:hover,
+    :root body #my-bookings-list > li:hover,
+    :root body #bus1-list > li:hover,
+    :root body #bus2-list > li:hover {
+        transform: none !important;
+    }
+}
+
+/* ===== SERTONIBUS — SMOOTHER MOTION ===== */
+
+/* ===== SERTONIBUS — DASHBOARD INSPIRED REFRESH ===== */
+
+/* Inspirado em dashboards profissionais: sidebar/verde profundo + conteúdo neutro + cards claros.
+   Referências visuais: Dribbble dashboard UI / dark-green dashboard patterns. */
+:root {
+    --modern-bg-dark: #111916;
+    --modern-surface-dark: #1b2723;
+    --modern-surface-soft: #24332e;
+    --modern-line-dark: rgba(255,255,255,.10);
+    --modern-ink-dark: #f2f5f3;
+    --modern-muted-dark: #9eaca6;
+    --modern-green-bright: #46b79b;
+    --modern-panel: #e9efec;
+    --modern-panel-2: #f4f7f5;
+    --modern-panel-ink: #18231f;
+}
+
+/* Fundo: menos "efeito", mais profundidade editorial */
+:root body {
+    color: var(--modern-ink-dark);
+    background:
+        radial-gradient(850px 500px at 12% -10%, rgba(67, 178, 149, .16), transparent 62%),
+        radial-gradient(700px 480px at 95% 15%, rgba(52, 103, 88, .16), transparent 64%),
+        linear-gradient(180deg, #101815 0%, #17211e 48%, #101714 100%);
+    background-attachment: fixed;
+}
+
+/* Halo decorativo extremamente discreto */
+:root body::before {
+    content: "";
+    position: fixed;
+    width: 560px;
+    height: 560px;
+    left: -260px;
+    top: 38%;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(70, 181, 153, .09), transparent 68%);
+    filter: blur(18px);
+    z-index: -1;
+}
+
+/* Área de gestão mais clara para separar as seções */
+:root body .bg-gray-50,
+:root body .bg-gray-100 {
+    background: linear-gradient(180deg, #2d4039 0%, #273a34 100%) !important;
+}
+
+:root body .bg-white {
+    background: var(--modern-panel) !important;
+    color: var(--modern-panel-ink) !important;
+}
+
+:root body .bg-white .text-gray-800,
+:root body .bg-white .text-gray-700,
+:root body .bg-white .text-gray-900 {
+    color: var(--modern-panel-ink) !important;
+}
+
+:root body .bg-white .text-gray-600,
+:root body .bg-white .text-gray-500 {
+    color: #5e6d66 !important;
+}
+
+:root body .border-gray-200,
+:root body .border-gray-300 {
+    border-color: rgba(255,255,255,.14) !important;
+}
+
+/* Inputs claros: contraste limpo, sem transformar tudo em verde */
+:root body input,
+:root body select,
+:root body textarea {
+    background: #f2f6f4 !important;
+    color: #17221e !important;
+    border-color: #cbd8d2 !important;
+}
+
+:root body input::placeholder,
+:root body textarea::placeholder {
+    color: #7b8983 !important;
+}
+
+/* Cards claros ganham profundidade com sombra leve */
+:root body .bg-white,
+:root body .bg-gray-50,
+:root body .bg-gray-100 {
+    box-shadow: 0 16px 40px rgba(0,0,0,.14);
+}
+
+/* Modais permanecem escuros e elegantes */
+:root body #profile-modal > div,
+:root body #public-profile-modal > div {
+    background: #202d29 !important;
+    color: #edf5f1 !important;
+}
+
+:root body #profile-modal input,
+:root body #profile-modal textarea,
+:root body #public-profile-modal input,
+:root body #public-profile-modal textarea {
+    background: #f1f5f3 !important;
+    color: #18231f !important;
+}
+
+/* Pequeno destaque de interação, sem neon */
+:root body button:hover,
+:root body a:hover {
+    filter: brightness(1.06);
+}
+
+/* ===== SERTONIBUS — LEGACY DARK OVERRIDES ===== */
+
+
+/* Painel de gestão: mais claro para criar contraste visual */
+:root body .bg-gray-50,
+:root body .bg-gray-100 {
+    background: linear-gradient(145deg, #2b403a 0%, #304a43 55%, #263b36 100%) !important;
+}
+:root body .bg-white {
+    background: linear-gradient(145deg, rgba(53, 76, 69, .96), rgba(43, 64, 58, .96)) !important;
+}
+:root body .border-gray-200,
+:root body .border-gray-300 {
+    border-color: rgba(194, 220, 211, .18) !important;
+}
+:root body .text-gray-800,
+:root body .text-gray-700 {
+    color: #edf5f1 !important;
+}
+:root body .text-gray-600,
+:root body .text-gray-500 {
+    color: #b8c9c3 !important;
+}
+
+/* Fundo com fade mais profundo e detalhes suaves */
+:root body {
+    background:
+        radial-gradient(900px 620px at 8% 4%, rgba(73, 185, 160, .24), transparent 66%),
+        radial-gradient(760px 540px at 94% 14%, rgba(69, 120, 108, .26), transparent 68%),
+        radial-gradient(620px 520px at 52% 88%, rgba(35, 94, 81, .30), transparent 72%),
+        linear-gradient(155deg, #101c19 0%, #1b2c27 42%, #20352f 70%, #10201c 100%);
+    background-attachment: fixed;
+}
+:root body::before,
+:root body::after {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+    z-index: -1;
+    border-radius: 999px;
+    filter: blur(12px);
+}
+:root body::before {
+    width: 360px;
+    height: 360px;
+    top: 18%;
+    left: -120px;
+    background: radial-gradient(circle, rgba(80, 190, 166, .14), transparent 68%);
+}
+:root body::after {
+    width: 440px;
+    height: 440px;
+    right: -150px;
+    bottom: 4%;
+    background: radial-gradient(circle, rgba(98, 143, 132, .12), transparent 68%);
+}
+
+:root {
+    --modern-bg-dark: #172522;
+    --modern-surface-dark: #20322e;
+    --modern-surface-soft: #263b36;
+    --modern-line-dark: rgba(188, 220, 210, .13);
+    --modern-ink-dark: #edf5f1;
+    --modern-muted-dark: #a9bbb5;
+    --modern-green-bright: #36a892;
+}
+
+:root body {
+    color: var(--modern-ink-dark);
+    background:
+        radial-gradient(800px 500px at 0% 0%, rgba(54,168,146,.20), transparent 68%),
+        radial-gradient(700px 420px at 100% 8%, rgba(34,91,80,.32), transparent 70%),
+        linear-gradient(145deg, #14221f 0%, #1b2b27 48%, #12201d 100%);
+}
+
+:root body::before {
+    background: linear-gradient(115deg, transparent 0 35%, rgba(100,180,160,.07) 50%, transparent 65%);
+}
+
+:root body header {
+    color: var(--modern-ink-dark);
+    background: rgba(22, 38, 34, .82);
+    border-bottom: 1px solid var(--modern-line-dark);
+    box-shadow: 0 10px 30px rgba(0,0,0,.16);
+}
+
+:root body header h1,
+:root body h1,
+:root body h2,
+:root body h3 {
+    color: var(--modern-ink-dark);
+}
+
+:root body #user-display,
+:root body header .text-sm,
+:root body label {
+    color: var(--modern-muted-dark);
+}
+
+:root body .bg-white {
+    background: rgba(31, 50, 46, .90);
+    border-color: rgba(188,220,210,.10);
+    box-shadow: 0 22px 55px rgba(0,0,0,.22), 0 2px 8px rgba(0,0,0,.10);
+}
+
+:root body input,
+:root body select,
+:root body textarea {
+    color: var(--modern-ink-dark);
+    background: rgba(15, 30, 27, .72);
+    border-color: var(--modern-line-dark);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.14);
+}
+
+:root body input:hover,
+:root body select:hover,
+:root body textarea:hover {
+    border-color: rgba(54,168,146,.38);
+    background: rgba(18,35,31,.82);
+}
+
+:root body input:focus,
+:root body select:focus,
+:root body textarea:focus {
+    border-color: rgba(54,168,146,.65);
+    box-shadow: 0 0 0 3px rgba(54,168,146,.14);
+    background: #172a25;
+}
+
+:root body option {
+    color: var(--modern-ink-dark);
+    background: #20322e;
+}
+
+:root body #btn-profile {
+    color: #79cbbb;
+    background: rgba(54,168,146,.12);
+    border-color: rgba(54,168,146,.22);
+}
+
+:root body #btn-profile:hover {
+    background: rgba(54,168,146,.20);
+}
+
+:root body #btn-logout {
+    color: #b7c8c2;
+    background: rgba(255,255,255,.035);
+    border-color: var(--modern-line-dark);
+}
+
+:root body #btn-logout:hover {
+    color: #fff;
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.18);
+}
+
+:root body #driver-preview-card {
+    background: linear-gradient(110deg, rgba(28,73,64,.78), rgba(31,50,46,.72)) !important;
+    border-color: rgba(54,168,146,.22) !important;
+}
+
+:root body #my-bookings-list > li {
+    background: rgba(15,30,27,.34);
+    border-color: var(--modern-line-dark);
+}
+
+:root body #bus1-list > li,
+:root body #bus2-list > li {
+    color: var(--modern-ink-dark);
+}
+
+:root body #bus1-list > li:hover,
+:root body #bus2-list > li:hover {
+    background: rgba(54,168,146,.08);
+}
+
+:root body #bus1-list > li > span:first-child,
+:root body #bus2-list > li > span:first-child,
+:root body #my-bookings-list p.font-bold {
+    color: var(--modern-ink-dark);
+}
+
+:root body #bus1-list > li > span:last-child,
+:root body #bus2-list > li > span:last-child {
+    color: #83d4c4;
+    background: rgba(54,168,146,.13);
+}
+
+:root body .text-gray-400 { color: #81958e; }
+:root body .text-gray-500,
+:root body .text-gray-600 { color: #9aada7; }
+:root body .text-gray-700,
+:root body .text-gray-800,
+:root body .text-gray-900 { color: var(--modern-ink-dark); }
+
+:root body .bg-gray-50 {
+    background: rgba(15,30,27,.45);
+}
+
+:root body .bg-blue-50,
+:root body .bg-blue-100,
+:root body .bg-green-50,
+:root body .bg-green-100 {
+    background: rgba(54,168,146,.11) !important;
+}
+
+:root body .bg-yellow-100 {
+    background: rgba(218,164,74,.13) !important;
+}
+
+:root body .border-gray-200,
+:root body .border-gray-300,
+:root body .border-blue-200 {
+    border-color: var(--modern-line-dark) !important;
+}
+
+:root body #public-profile-modal > div,
+:root body #profile-modal > div {
+    background: #20322e;
+    border: 1px solid rgba(188,220,210,.12);
+}
+
+:root body #public-profile-modal,
+:root body #profile-modal {
+    color: var(--modern-ink-dark);
+}
+
+:root body .bg-black\\/50 {
+    background: rgba(3, 12, 10, .70);
+}
+
+:root body a.underline {
+    color: #9db3ac;
+}
+
+:root body a.underline:hover {
+    color: #73c8b8;
+}
+
+:root body .border-red-200 {
+    border-color: rgba(220,76,63,.28) !important;
+}
+
+@keyframes sertonibus-overlay-close {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+@keyframes sertonibus-modal-close {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(22px) scale(.94); }
+}
+:root body #profile-modal.closing,
+:root body #public-profile-modal.closing {
+    display: flex !important;
+    animation: sertonibus-overlay-close .48s ease both !important;
+}
+:root body #profile-modal.closing > div,
+:root body #public-profile-modal.closing > div {
+    animation: sertonibus-modal-close .52s cubic-bezier(.22,.7,.2,1) both !important;
+}
+@keyframes sertonibus-overlay-open {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes sertonibus-modal-open {
+    from { opacity: 0; transform: translateY(22px) scale(.94); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+:root body #profile-modal:not(.hidden):not(.closing),
+:root body #public-profile-modal:not(.hidden):not(.closing) {
+    animation: sertonibus-overlay-open .48s ease both;
+}
+:root body #profile-modal:not(.hidden):not(.closing) > div,
+:root body #public-profile-modal:not(.hidden):not(.closing) > div {
+    animation: sertonibus-modal-open .52s cubic-bezier(.2,.75,.2,1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+    :root body #profile-modal.closing,
+    :root body #public-profile-modal.closing,
+    :root body #profile-modal.closing > div,
+    :root body #public-profile-modal.closing > div { animation: none !important; }
+}
+
+:root body a,
+:root body button,
+:root body select,
+:root body input,
+:root body textarea,
+:root body #my-bookings-list > li,
+:root body #bus1-list > li,
+:root body #bus2-list > li {
+    transition:
+        transform .28s cubic-bezier(.2,.8,.2,1),
+        box-shadow .28s ease,
+        background-color .28s ease,
+        border-color .28s ease,
+        color .28s ease;
+}
+
+@keyframes sertonibus-overlay-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes sertonibus-modal-in {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(.94);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes sertonibus-modal-out {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(18px) scale(.95);
+    }
+}
+
+/* Abertura mais suave e longa */
+:root body #profile-modal:not(.hidden),
+:root body #public-profile-modal:not(.hidden) {
+    animation: sertonibus-overlay-in .38s ease-out both;
+}
+
+:root body #profile-modal:not(.hidden) > div,
+:root body #public-profile-modal:not(.hidden) > div {
+    animation: sertonibus-modal-in .48s cubic-bezier(.2,.75,.2,1) both;
+}
+
+/*
+ * Fechamento:
+ * JS adiciona .closing antes de aplicar .hidden.
+ * Assim a janela faz a saída completa em vez de desaparecer instantaneamente.
+ */
+:root body #profile-modal.closing,
+:root body #public-profile-modal.closing {
+    display: flex !important;
+    animation: sertonibus-overlay-in .34s ease-out reverse both;
+}
+
+:root body #profile-modal.closing > div,
+:root body #public-profile-modal.closing > div {
+    animation: sertonibus-modal-out .38s cubic-bezier(.4,0,.8,.25) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root body #profile-modal:not(.hidden),
+    :root body #public-profile-modal:not(.hidden),
+    :root body #profile-modal:not(.hidden) > div,
+    :root body #public-profile-modal:not(.hidden) > div,
+    :root body #profile-modal.closing,
+    :root body #public-profile-modal.closing,
+    :root body #profile-modal.closing > div,
+    :root body #public-profile-modal.closing > div {
+        animation: none !important;
+    }
+}
+
+/* ===== SERTONIBUS — FINAL VISUAL OVERRIDES ===== */
+:root body {
+    background:
+        radial-gradient(900px 520px at 8% -8%, rgba(66,173,145,.13), transparent 62%),
+        radial-gradient(760px 500px at 96% 12%, rgba(72,111,98,.12), transparent 64%),
+        linear-gradient(180deg, #101714 0%, #17211e 55%, #111916 100%) !important;
+}
+
+:root body .bg-gray-50,
+:root body .bg-gray-100 {
+    background: #293a35 !important;
+}
+
+:root body .bg-white {
+    background: #e8eeeb !important;
+    color: #17221e !important;
+}
+
+:root body .bg-white .text-gray-800,
+:root body .bg-white .text-gray-700,
+:root body .bg-white .text-gray-900 {
+    color: #17221e !important;
+}
+
+:root body .bg-white .text-gray-600,
+:root body .bg-white .text-gray-500 {
+    color: #5d6b65 !important;
+}
+
+:root body .bg-white input,
+:root body .bg-white select,
+:root body .bg-white textarea {
+    background: #f7f9f8 !important;
+    color: #17221e !important;
+    border-color: #cbd6d1 !important;
+}
+
+:root body .bg-white,
+:root body .bg-gray-50,
+:root body .bg-gray-100 {
+    box-shadow: 0 14px 34px rgba(0,0,0,.12) !important;
+}
+
+:root body header {
+    background: rgba(20,31,27,.92) !important;
+    backdrop-filter: blur(14px);
+    border-color: rgba(255,255,255,.08) !important;
+}
+
+:root body #profile-modal > div,
+:root body #public-profile-modal > div {
+    background: #202c28 !important;
+    color: #edf5f1 !important;
+}
+
+/* Correção de legibilidade das áreas do motorista */
+:root body main .bg-white h2,
+:root body main .bg-white h3,
+:root body main .bg-white label,
+:root body main .bg-white p,
+:root body main .bg-white li,
+:root body main .bg-white span {
+    color: #17221e;
+}
+
+:root body main .bg-white .text-gray-500,
+:root body main .bg-white .text-gray-600 {
+    color: #5d6b65 !important;
+}
+
+:root body #bus1-list li,
+:root body #bus2-list li {
+    color: #17221e !important;
+    background: transparent !important;
+}
+
+:root body #bus1-list li > span:first-child,
+:root body #bus2-list li > span:first-child {
+    color: #17221e !important;
+    font-weight: 600;
+}
+
+:root body #bus1-list .view-student-profile,
+:root body #bus2-list .view-student-profile {
+    color: #1976a3 !important;
+}
+
+:root body #bus1-list li .text-gray-400,
+:root body #bus2-list li .text-gray-400 {
+    color: #66756e !important;
+}
+
+:root body main h2,
+:root body main h3 {
+    letter-spacing: -.01em;
+}
+
+/* Cadastro: contraste estável para o título e os campos */
+:root body > .max-w-sm.bg-white {
+    background: #e8eeeb !important;
+    color: #17221e !important;
+}
+
+:root body > .max-w-sm.bg-white h2 {
+    color: #17221e !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+}
+
+:root body > .max-w-sm.bg-white label {
+    color: #40524b !important;
+}
+
+:root body > .max-w-sm.bg-white input,
+:root body > .max-w-sm.bg-white select {
+    background: #f7f9f8 !important;
+    color: #17221e !important;
+    -webkit-text-fill-color: #17221e !important;
+}
+
+/* Login: contraste estável para o título e os campos */
+:root body > .max-w-sm.bg-white h2 {
+    color: #17221e !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+}
+
+:root body > .max-w-sm.bg-white label {
+    color: #40524b !important;
+}
+
+:root body > .max-w-sm.bg-white input,
+:root body > .max-w-sm.bg-white select {
+    background: #f7f9f8 !important;
+    color: #17221e !important;
+    -webkit-text-fill-color: #17221e !important;
+}
+
+/* Botão de foto alinhado à identidade visual do Sertonibus */
+:root body #profile-modal label[for="profile-photo"] {
+    background: #31463f !important;
+    color: #e8efec !important;
+    border: 1px solid #3b554c !important;
+    box-shadow: none !important;
+    color-scheme: dark;
+}
+
+:root body #profile-modal label[for="profile-photo"]:hover {
+    background: #3a5149 !important;
+    border-color: #456259 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,0,0,.14) !important;
+}
+
+
+/* =========================================================
+   SERTONIBUS UI SYSTEM — mensagens e confirmações
+   ========================================================= */
+
+.sertonibus-toast-container {
+    position: fixed;
+    top: 22px;
+    right: 22px;
+    z-index: 9999;
+    width: min(390px, calc(100vw - 32px));
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.sertonibus-toast {
+    display: grid;
+    grid-template-columns: 34px 1fr 28px;
+    align-items: start;
+    gap: 12px;
+    padding: 14px 14px 14px 15px;
+    border: 1px solid rgba(31, 49, 43, .10);
+    border-radius: 15px;
+    background: rgba(248, 250, 249, .98);
+    color: #17221e;
+    box-shadow: 0 18px 45px rgba(15, 28, 23, .18);
+    backdrop-filter: blur(14px);
+    pointer-events: auto;
+    opacity: 0;
+    transform: translateX(28px) scale(.97);
+    transition: opacity .32s ease, transform .36s cubic-bezier(.2,.75,.2,1);
+}
+
+.sertonibus-toast.is-visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+.sertonibus-toast.is-closing {
+    opacity: 0;
+    transform: translateX(24px) scale(.97);
+}
+
+.sertonibus-toast-icon {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 15px;
+    background: #e6eeea;
+    color: #315247;
+}
+
+.sertonibus-toast-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.sertonibus-toast-content strong {
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.sertonibus-toast-content span {
+    font-size: 12px;
+    line-height: 1.45;
+    color: #5b6963;
+}
+
+.sertonibus-toast-close {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #718079;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.sertonibus-toast-close:hover {
+    background: #e9efec;
+    color: #25362f;
+    transform: scale(1.06);
+}
+
+.sertonibus-toast-error {
+    border-left: 4px solid #c95656;
+}
+
+.sertonibus-toast-error .sertonibus-toast-icon {
+    background: #f8e8e8;
+    color: #b13e3e;
+}
+
+.sertonibus-toast-success {
+    border-left: 4px solid #3d8a68;
+}
+
+.sertonibus-toast-success .sertonibus-toast-icon {
+    background: #e5f1eb;
+    color: #28704f;
+}
+
+.sertonibus-toast-warning {
+    border-left: 4px solid #c58a39;
+}
+
+.sertonibus-toast-warning .sertonibus-toast-icon {
+    background: #f7eddc;
+    color: #9a6724;
+}
+
+.sertonibus-toast-info {
+    border-left: 4px solid #527a70;
+}
+
+.sertonibus-toast-info .sertonibus-toast-icon {
+    background: #e5efed;
+    color: #37645a;
+}
+
+.sertonibus-confirm-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(10, 19, 16, .54);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity .26s ease;
+}
+
+.sertonibus-confirm-overlay.is-visible {
+    opacity: 1;
+}
+
+.sertonibus-confirm-modal {
+    width: min(430px, 100%);
+    padding: 27px;
+    border: 1px solid rgba(31, 49, 43, .10);
+    border-radius: 20px;
+    background: #f8faf9;
+    color: #17221e;
+    box-shadow: 0 26px 70px rgba(8, 19, 14, .28);
+    transform: translateY(16px) scale(.96);
+    transition: transform .32s cubic-bezier(.2,.75,.2,1);
+}
+
+.sertonibus-confirm-overlay.is-visible .sertonibus-confirm-modal {
+    transform: translateY(0) scale(1);
+}
+
+.sertonibus-confirm-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 15px;
+    border-radius: 13px;
+    background: #f8e9e9;
+    color: #b23d3d;
+    font-weight: 800;
+}
+
+.sertonibus-confirm-modal h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 750;
+    letter-spacing: -.02em;
+}
+
+.sertonibus-confirm-modal p {
+    margin: 9px 0 22px;
+    color: #64716c;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.sertonibus-confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+}
+
+.sertonibus-confirm-actions button {
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.sertonibus-confirm-cancel {
+    background: #e8eeeb;
+    color: #33453e;
+}
+
+.sertonibus-confirm-ok {
+    background: #35594d;
+    color: #fff;
+}
+
+.sertonibus-confirm-ok.danger {
+    background: #b84b4b;
+}
+
+.sertonibus-confirm-actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(15, 30, 24, .12);
+}
+
+@media (max-width: 640px) {
+    .sertonibus-toast-container {
+        top: 12px;
+        right: 12px;
+        width: calc(100vw - 24px);
+    }
+
+    .sertonibus-confirm-modal {
+        padding: 22px;
+    }
+}
+
+
+/* Field states and button feedback */
+.sertonibus-field-error {
+    border-color: #c95656 !important;
+    box-shadow: 0 0 0 3px rgba(201, 86, 86, .10) !important;
+}
+.sertonibus-field-success {
+    border-color: #3d8a68 !important;
+    box-shadow: 0 0 0 3px rgba(61, 138, 104, .10) !important;
+}
+.sertonibus-button-loading {
+    opacity: .78 !important;
+    cursor: wait !important;
+    transform: none !important;
+}
+.sertonibus-spinner {
+    width: 15px;
+    height: 15px;
+    border: 2px solid rgba(255,255,255,.45);
+    border-top-color: currentColor;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    animation: sertonibus-spin .7s linear infinite;
+}
+@keyframes sertonibus-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* =========================================================
+   SERTONIBUS AUTH EXPERIENCE
+   Login + cadastro com linguagem visual única
+   ========================================================= */
+.sertonibus-auth-page {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 18px;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(58, 102, 83, .16), transparent 34%),
+        radial-gradient(circle at 90% 85%, rgba(33, 55, 47, .12), transparent 38%),
+        #edf2ef;
+    color: #17221e;
+    box-sizing: border-box;
+}
+
+.sertonibus-auth-shell {
+    width: min(100%, 460px);
+}
+
+.sertonibus-auth-card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 34px;
+    border: 1px solid rgba(49, 70, 63, .13);
+    border-radius: 22px;
+    background: rgba(250, 252, 251, .97);
+    box-shadow: 0 22px 60px rgba(25, 43, 36, .13), 0 3px 12px rgba(25, 43, 36, .05);
+    animation: sertonibus-auth-card-in .5s cubic-bezier(.2,.75,.2,1) both;
+}
+
+.sertonibus-auth-card-register {
+    max-height: calc(100vh - 36px);
+    overflow-y: auto;
+}
+
+.sertonibus-auth-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.sertonibus-auth-mark {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: #29473b;
+    color: #f3f7f5;
+    font-size: 20px;
+    font-weight: 800;
+    box-shadow: 0 7px 18px rgba(41, 71, 59, .18);
+}
+
+.sertonibus-auth-kicker {
+    display: block;
+    color: #29473b;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .16em;
+}
+
+.sertonibus-auth-brand p {
+    margin: 2px 0 0;
+    color: #7a8982;
+    font-size: 11px;
+}
+
+.sertonibus-auth-heading {
+    margin-bottom: 24px;
+}
+
+.sertonibus-auth-eyebrow {
+    display: inline-block;
+    margin-bottom: 7px;
+    color: #4c685d;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+}
+
+.sertonibus-auth-heading h1 {
+    margin: 0;
+    color: #17221e;
+    font-size: 28px;
+    line-height: 1.15;
+    font-weight: 750;
+    letter-spacing: -.025em;
+}
+
+.sertonibus-auth-heading p {
+    margin: 7px 0 0;
+    color: #718078;
+    font-size: 14px;
+}
+
+.sertonibus-auth-form {
+    display: grid;
+    gap: 17px;
+}
+
+.sertonibus-auth-field {
+    display: grid;
+    gap: 7px;
+}
+
+.sertonibus-auth-field label {
+    color: #34473f;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.sertonibus-auth-field input,
+.sertonibus-auth-field select {
+    width: 100%;
+    min-height: 44px;
+    box-sizing: border-box;
+    border: 1px solid #cbd6d1;
+    border-radius: 10px;
+    outline: none;
+    background: #fff;
+    color: #17221e;
+    padding: 0 13px;
+    font-size: 14px;
+    transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.sertonibus-auth-field input::placeholder {
+    color: #a1ada7;
+}
+
+.sertonibus-auth-field input:focus,
+.sertonibus-auth-field select:focus {
+    border-color: #5c806f;
+    box-shadow: 0 0 0 3px rgba(92, 128, 111, .12);
+    background: #fcfefd;
+}
+
+.sertonibus-password-wrap {
+    position: relative;
+}
+
+.sertonibus-password-wrap input {
+    padding-right: 46px;
+}
+
+.sertonibus-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    width: 34px;
+    height: 34px;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #63756d;
+    cursor: pointer;
+    transition: background .18s ease, color .18s ease;
+}
+
+.sertonibus-password-toggle:hover {
+    background: #e8efeb;
+    color: #29473b;
+}
+
+.sertonibus-password-toggle:focus-visible {
+    outline: 2px solid #5c806f;
+    outline-offset: 1px;
+}
+
+.sertonibus-auth-hint {
+    margin: -1px 0 0;
+    color: #7c8a84;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.sertonibus-inline-error {
+    margin: -1px 0 0;
+    padding: 8px 10px;
+    border: 1px solid #edcaca;
+    border-radius: 8px;
+    background: #fff5f5;
+    color: #a34848;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.sertonibus-password-strength {
+    margin-top: 1px;
+}
+
+.sertonibus-strength-track {
+    height: 5px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #dfe7e3;
+}
+
+.sertonibus-strength-track > div {
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    transition: width .3s ease, background .3s ease;
+}
+
+.sertonibus-strength-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 5px;
+    font-size: 10px;
+}
+
+#password-strength-label {
+    font-weight: 700;
+}
+
+#password-strength-hint {
+    color: #84918b;
+    text-align: right;
+}
+
+.sertonibus-auth-submit {
+    position: relative;
+    width: 100%;
+    min-height: 46px;
+    margin-top: 4px;
+    border: 1px solid #29473b;
+    border-radius: 10px;
+    background: #29473b;
+    color: #f5f8f6;
+    font-size: 13px;
+    font-weight: 750;
+    cursor: pointer;
+    box-shadow: 0 7px 16px rgba(41, 71, 59, .15);
+    transition: transform .18s ease, background .18s ease, box-shadow .18s ease, opacity .18s ease;
+}
+
+.sertonibus-auth-submit:hover:not(:disabled) {
+    background: #345b4b;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(41, 71, 59, .18);
+}
+
+.sertonibus-auth-submit:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.sertonibus-auth-submit:disabled,
+.sertonibus-auth-submit.is-loading {
+    cursor: wait;
+    opacity: .82;
+    transform: none;
+}
+
+.sertonibus-submit-loading {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.sertonibus-auth-submit.is-loading .sertonibus-submit-label {
+    display: none;
+}
+
+.sertonibus-auth-submit.is-loading .sertonibus-submit-loading {
+    display: flex;
+}
+
+.sertonibus-auth-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 21px;
+    color: #7a8881;
+    font-size: 12px;
+}
+
+.sertonibus-auth-footer a {
+    color: #315b4a;
+    font-weight: 750;
+    text-decoration: none;
+}
+
+.sertonibus-auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.sertonibus-auth-back {
+    display: block;
+    width: fit-content;
+    margin: 15px auto 0;
+    color: #7d8a84;
+    font-size: 11px;
+    text-decoration: none;
+}
+
+.sertonibus-auth-back:hover {
+    color: #315b4a;
+}
+
+@keyframes sertonibus-auth-card-in {
+    from { opacity: 0; transform: translateY(12px) scale(.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 560px) {
+    .sertonibus-auth-page {
+        align-items: flex-start;
+        padding: 18px 12px;
+    }
+
+    .sertonibus-auth-card {
+        padding: 25px 20px;
+        border-radius: 18px;
+    }
+
+    .sertonibus-auth-card-register {
+        max-height: calc(100vh - 36px);
+    }
+
+    .sertonibus-auth-heading h1 {
+        font-size: 25px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sertonibus-auth-card,
+    .sertonibus-auth-submit,
+    .sertonibus-auth-field input,
+    .sertonibus-auth-field select,
+    .sertonibus-password-toggle {
+        animation: none !important;
+        transition: none !important;
+    }
+}
