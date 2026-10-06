@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const driverCodeField = document.getElementById('driver-code-field');
         const driverCodeInput = document.getElementById('driver-code');
 
-        // O campo do código só aparece (e só é obrigatório) quando o perfil é Motorista
+        // O campo do código só aparece (e só é obrigatório) quando o perfil é Motorista.
+        // O conteúdo do código é livre: não existe um código fixo para validar.
         const syncDriverCodeField = () => {
             const isDriver = roleSelect.value === 'driver';
             driverCodeField.classList.toggle('hidden', !isDriver);
