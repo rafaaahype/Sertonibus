@@ -18,19 +18,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const registrationDisplay = document.getElementById('profile-registration');
     const roleDisplay = document.getElementById('profile-role');
     const originSelect = document.getElementById('profile-origin');
+    const routeCitySelect = document.getElementById('profile-route-city');
     const profilePhotoData = document.getElementById('profile-photo-data');
     const profileMessage = document.getElementById('profile-message');
 
-    // Popula o select de cidades com as cidades disponíveis (incluindo Cajazeiras)
+    // Popula os selects com as cidades e rotas disponíveis
     const populateCities = () => {
-        if (!originSelect || !DB.ALL_CITIES) return;
-        originSelect.innerHTML = '<option value="">Selecione sua cidade...</option>';
-        DB.ALL_CITIES.forEach(city => {
-            const opt = document.createElement('option');
-            opt.value = city;
-            opt.textContent = city;
-            originSelect.appendChild(opt);
-        });
+        if (originSelect && DB.ALL_CITIES) {
+            originSelect.innerHTML = '<option value="">Selecione sua cidade...</option>';
+            DB.ALL_CITIES.forEach(city => {
+                const opt = document.createElement('option');
+                opt.value = city;
+                opt.textContent = city;
+                originSelect.appendChild(opt);
+            });
+        }
+
+        if (routeCitySelect && DB.ROUTE_CITIES) {
+            routeCitySelect.innerHTML = '<option value="">Selecione a rota...</option>';
+            DB.ROUTE_CITIES.forEach(city => {
+                const opt = document.createElement('option');
+                opt.value = city;
+                opt.textContent = (city === DB.DESTINATION_CITY)
+                    ? `${city} (Linha Municipal)`
+                    : `${city} ↔ ${DB.DESTINATION_CITY}`;
+                routeCitySelect.appendChild(opt);
+            });
+        }
     };
 
     populateCities();
@@ -45,20 +59,34 @@ document.addEventListener('DOMContentLoaded', () => {
         registrationDisplay.textContent = user.registration || 'Não se aplica';
         roleDisplay.textContent = user.role === 'driver' ? 'Motorista' : 'Aluno / Passageiro';
 
-        const userCity = user.homeCity || user.routeCity || user.origin || '';
-        
-        // Garante que a cidade atual do usuário esteja presente nas opções caso seja diferente
-        if (userCity && originSelect) {
-            const exists = Array.from(originSelect.options).some(opt => opt.value === userCity);
+        const userOrigin = user.origin || user.homeCity || '';
+        if (userOrigin && originSelect) {
+            const exists = Array.from(originSelect.options).some(opt => opt.value === userOrigin);
             if (!exists) {
                 const opt = document.createElement('option');
-                opt.value = userCity;
-                opt.textContent = userCity;
+                opt.value = userOrigin;
+                opt.textContent = userOrigin;
                 originSelect.appendChild(opt);
             }
-            originSelect.value = userCity;
+            originSelect.value = userOrigin;
         } else if (originSelect) {
             originSelect.value = '';
+        }
+
+        if (routeCitySelect) {
+            const userRoute = user.routeCity || user.origin || '';
+            if (userRoute) {
+                const exists = Array.from(routeCitySelect.options).some(opt => opt.value === userRoute);
+                if (!exists) {
+                    const opt = document.createElement('option');
+                    opt.value = userRoute;
+                    opt.textContent = userRoute;
+                    routeCitySelect.appendChild(opt);
+                }
+                routeCitySelect.value = userRoute;
+            } else {
+                routeCitySelect.value = '';
+            }
         }
 
         profilePhotoData.value = user.profilePhoto || '';
@@ -125,21 +153,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const user = DB.getUserById(userSession.id);
         const origin = originSelect?.value.trim() || '';
+        const routeCity = routeCitySelect?.value.trim() || '';
 
-        if (!origin) {
-            profileMessage.textContent = 'Por favor, selecione uma cidade.';
+        if (!origin && !routeCity) {
+            profileMessage.textContent = 'Por favor, informe a cidade.';
             return;
         }
 
         const payload = {
-            origin,
+            origin: origin || routeCity,
             profilePhoto: profilePhotoData.value
         };
 
         if (user?.role === 'student') {
             payload.homeCity = origin;
         } else if (user?.role === 'driver') {
-            payload.routeCity = origin;
+            if (origin) payload.origin = origin;
+            if (routeCity) payload.routeCity = routeCity;
         }
 
         const saved = DB.updateUserProfile(userSession.id, payload);
