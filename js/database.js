@@ -5,19 +5,9 @@
 const DB_USERS = 'sertonibus_users';
 const DB_BOOKINGS = 'sertonibus_bookings';
 const DB_CURRENT_USER = 'sertonibus_logged_user';
-const DB_SHIFT_CONFIGS = 'sertonibus_shift_configs';
-const DB_LAST_ADDRESS = 'sertonibus_last_address_'; // + id do estudante
-
-// Capacidade padrão do ônibus quando o motorista ainda não definiu outra
-const DEFAULT_CAPACITY = 5;
 
 // Regra principal: só cabem 5 estudantes por ônibus
 const MAX_CAPACITY = 5;
-
-// Código exigido para criar uma conta de motorista (troque por um valor seu).
-// Atenção: como o projeto roda só no navegador, esse código fica visível no código-fonte.
-// Ele impede cadastros por engano ou curiosidade, mas não é segurança de verdade (isso exige um servidor).
-const DRIVER_ACCESS_CODE = '123';
 
 const DB = {
     // Retorna todos os usuários cadastrados
@@ -42,7 +32,8 @@ const DB = {
     logout: () => {
         localStorage.removeItem(DB_CURRENT_USER);
         window.location.href = 'index.html';
-    },
+    }
+};
 
     // ==========================================
     // CONFIGURAÇÃO DE VAGAS POR TURNO (motorista)
