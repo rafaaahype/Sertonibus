@@ -106,11 +106,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (isDriver) registrationInput.value = '';
             }
 
-            // Campos de cidade
+            // Campos de cidade: residência para ambos, rota adicional para motorista
             if (homeCityField && homeCitySelect) {
-                homeCityField.classList.toggle('hidden', isDriver);
-                homeCitySelect.required = !isDriver;
-                if (isDriver) homeCitySelect.value = '';
+                homeCityField.classList.remove('hidden');
+                homeCitySelect.required = true;
+                const label = homeCityField.querySelector('label');
+                const hint = homeCityField.querySelector('.sertonibus-auth-hint');
+                if (label) {
+                    label.textContent = isDriver ? 'Sua cidade de residência (onde mora)' : 'Cidade de origem';
+                }
+                if (hint) {
+                    hint.textContent = isDriver ? 'Sua cidade base / residência.' : 'O ônibus da sua cidade aparecerá automaticamente.';
+                }
             }
             if (routeCityField && routeCitySelect) {
                 routeCityField.classList.toggle('hidden', !isDriver);
@@ -264,8 +271,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Validação de cidade
-            if (role === 'student' && !homeCity) {
-                alert('Selecione sua cidade de origem para continuar.');
+            if (!homeCity) {
+                alert('Selecione sua cidade de residência/origem para continuar.');
                 markField(document.getElementById('home-city'), false);
                 hasValidationError = true;
             }
@@ -312,7 +319,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 cpf:          cpfDigits,
                 registration: role === 'student' ? registrationDigits : '',
                 role,
-                homeCity:     role === 'student' ? homeCity : '',
+                origin:       homeCity || routeCity,
+                homeCity:     homeCity,
                 routeCity:    role === 'driver'  ? routeCity : '',
                 passwordHash
             });
