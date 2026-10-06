@@ -13,6 +13,7 @@
             <h1 class="text-xl font-bold flex items-center gap-2">🚌 Sertonibus 🌵 | Motorista</h1>
             <div class="text-sm font-medium">
                 <span id="user-display" class="mr-4 text-yellow-400"></span>
+            <button id="btn-profile" class="mr-4 bg-white/15 hover:bg-white/25 px-3 py-1 rounded">Meu Perfil</button>
                 <button id="btn-logout" class="underline hover:text-gray-300">Sair</button>
             </div>
         </div>
@@ -52,30 +53,120 @@
             </form>
         </div>
 
-        <div id="alert-extra-bus" class="hidden bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded shadow">
-            <p class="font-bold">Capacidade máxima excedida!</p>
-            <p class="text-sm">O sistema já requisitou um novo motorista e um ônibus extra para a rota.</p>
+        <!-- Banner da rota do motorista -->
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 flex items-center gap-4">
+            <span class="text-3xl">🗺️</span>
+            <div>
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Sua rota</p>
+                <p id="route-label" class="font-bold text-gray-800"></p>
+            </div>
         </div>
 
+        <div id="alert-extra-bus" class="hidden bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded shadow">
+            <p class="font-bold">Capacidade máxima excedida em um dos sentidos!</p>
+            <p class="text-sm">O número de agendamentos ultrapassou o limite configurado. Considere aumentar a capacidade ou acionar um veículo extra.</p>
+        </div>
+
+        <!-- Passageiros divididos por direção -->
         <div class="grid md:grid-cols-2 gap-6">
-            <!-- Ônibus Principal -->
-            <div class="bg-white p-4 rounded-lg shadow border border-gray-200">
-                <h3 class="font-bold bg-blue-100 text-blue-800 p-2 rounded text-center mb-1">Ônibus 1 (Principal)</h3>
-                <p id="bus1-capacity-text" class="text-xs text-center text-gray-500 mb-1"></p>
-                <p id="bus1-description" class="hidden text-xs text-center text-gray-600 mb-3"></p>
-                <ul id="bus1-list" class="divide-y space-y-1"></ul>
+            <!-- Ida: saindo da cidade de origem para Cajazeiras -->
+            <div class="bg-white p-4 rounded-lg shadow border-t-4 border-blue-500">
+                <h3 class="font-bold text-blue-800 text-center mb-1">🚌 Ida — Para Cajazeiras</h3>
+                <p id="bus-outbound-capacity" class="text-xs text-center text-gray-500 mb-1"></p>
+                <p id="bus-outbound-description" class="hidden text-xs text-center text-gray-600 mb-3"></p>
+                <ul id="bus-outbound-list" class="divide-y space-y-1"></ul>
             </div>
-            
-            <!-- Ônibus Extra -->
-            <div id="bus2-container" class="hidden bg-white p-4 rounded-lg shadow border border-red-200">
-                <h3 class="font-bold bg-red-100 text-red-800 p-2 rounded text-center mb-1">Ônibus 2 (Reforço)</h3>
-                <p class="text-xs text-center text-gray-500 mb-3">Alocados devido a excedente</p>
-                <ul id="bus2-list" class="divide-y space-y-1"></ul>
+
+            <!-- Volta: saindo de Cajazeiras de volta à cidade de origem -->
+            <div class="bg-white p-4 rounded-lg shadow border-t-4 border-green-500">
+                <h3 class="font-bold text-green-800 text-center mb-1">🏠 Volta — Para a Cidade</h3>
+                <p id="bus-return-capacity" class="text-xs text-center text-gray-500 mb-1"></p>
+                <p id="bus-return-description" class="hidden text-xs text-center text-gray-600 mb-3"></p>
+                <ul id="bus-return-list" class="divide-y space-y-1"></ul>
             </div>
         </div>
+
     </main>
 
+
+    <div id="public-profile-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
+            <div class="flex justify-between items-center mb-5">
+                <h2 class="text-xl font-bold">Perfil do aluno</h2>
+                <button id="btn-close-public-profile" type="button" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+            </div>
+            <div class="flex flex-col items-center mb-5">
+                <img id="public-profile-photo" class="hidden w-24 h-24 rounded-full object-cover border-4 border-gray-200" alt="Foto do aluno">
+                <div id="public-profile-placeholder" class="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center text-4xl">👤</div>
+            </div>
+            <div class="space-y-3 text-sm">
+                <p><strong>Nome:</strong> <span id="public-profile-name"></span></p>
+                <p><strong>Matrícula:</strong> <span id="public-profile-registration"></span></p>
+                <p><strong>De onde é:</strong> <span id="public-profile-origin"></span></p>
+                <p><strong>Perfil:</strong> <span id="public-profile-role"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="profile-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-5">
+                <h2 class="text-2xl font-bold">Meu Perfil</h2>
+                <button id="btn-close-profile" type="button" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+            </div>
+            <form id="form-profile" class="space-y-4">
+                <div class="flex flex-col items-center">
+                    <img id="profile-photo-preview" class="hidden w-28 h-28 rounded-full object-cover border-4 border-gray-200 mb-3" alt="Foto de perfil">
+                    <div id="profile-photo-placeholder" class="w-28 h-28 rounded-full bg-gray-100 flex items-center justify-center text-4xl mb-3">👤</div>
+                    <label class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                        Escolher foto
+                        <input id="profile-photo" type="file" accept="image/*" class="hidden">
+                    </label>
+                    <p class="text-xs text-gray-500 mt-1">Imagem de até 2 MB.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-sm font-medium">Nome</label>
+                        <p id="profile-name" class="bg-gray-100 rounded p-2 text-sm"></p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Usuário</label>
+                        <p id="profile-username" class="bg-gray-100 rounded p-2 text-sm"></p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">CPF</label>
+                        <p id="profile-cpf" class="bg-gray-100 rounded p-2 text-sm"></p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Matrícula</label>
+                        <p id="profile-registration" class="bg-gray-100 rounded p-2 text-sm"></p>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium">Perfil</label>
+                    <p id="profile-role" class="bg-gray-100 rounded p-2 text-sm"></p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium" for="profile-origin">Cidade da sua rota / Origem</label>
+                    <select id="profile-origin" class="w-full border rounded p-2 outline-none focus:border-green-500 bg-white">
+                        <option value="">Selecione a cidade...</option>
+                    </select>
+                </div>
+
+                <input id="profile-photo-data" type="hidden">
+                <p id="profile-message" class="text-sm text-green-600"></p>
+
+                <button type="submit" class="w-full bg-green-600 text-white font-bold py-2 rounded hover:bg-green-700">Salvar Perfil</button>
+            </form>
+        </div>
+    </div>
+
     <script src="js/database.js"></script>
+    <script src="js/ui.js"></script>
     <script src="js/driver.js"></script>
+    <script src="js/profile.js"></script>
 </body>
 </html>
