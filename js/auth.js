@@ -59,13 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Motorista precisa do código de autorização
-            if (role === 'driver' && driverCodeInput.value.trim() !== DRIVER_ACCESS_CODE) {
-                alert('Código de autorização inválido. Só é possível criar conta de motorista com o código correto.');
-                driverCodeInput.focus();
-                return;
-            }
-
             let users = DB.getUsers();
 
             // Verifica se o usuário já existe (ignorando espaços nas pontas, inclusive em contas antigas)
