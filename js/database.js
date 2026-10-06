@@ -15,8 +15,9 @@ const DEFAULT_CAPACITY = 5;
 // Cidade de destino (hub universitário) — ponto de chegada/saída de todas as rotas
 const DESTINATION_CITY = 'Cajazeiras - PB';
 
-// Cidades com rotas de ônibus disponíveis (linhas intermunicipais para Cajazeiras)
+// Cidades com rotas de ônibus disponíveis (linhas intermunicipais e polo)
 const ROUTE_CITIES = [
+    'Cajazeiras - PB',
     'Bom Jesus - PB',
     'Cachoeira dos Índios - PB',
     'Santa Helena - PB',
