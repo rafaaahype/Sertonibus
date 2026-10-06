@@ -7,42 +7,120 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
-        <h2 class="text-2xl font-bold text-center mb-6">Novo Cadastro</h2>
-        <form id="form-register" class="space-y-4">
-            <div>
-                <label class="block text-sm font-medium">Nome Completo</label>
-                <input type="text" id="name" required class="w-full border rounded p-2 outline-none focus:border-green-500">
+<body class="sertonibus-auth-page">
+    <main class="sertonibus-auth-shell">
+        <section class="sertonibus-auth-card sertonibus-auth-card-register" aria-label="Cadastro no Sertonibus">
+            <div class="sertonibus-auth-brand">
+                <div class="sertonibus-auth-mark">S</div>
+                <div>
+                    <span class="sertonibus-auth-kicker">SERTONIBUS</span>
+                    <p>Transporte universitário</p>
+                </div>
             </div>
-            <div>
-                <label class="block text-sm font-medium">Nome de Usuário (Login)</label>
-                <input type="text" id="username" required class="w-full border rounded p-2 outline-none focus:border-green-500">
+
+            <div class="sertonibus-auth-heading">
+                <span class="sertonibus-auth-eyebrow">Novo acesso</span>
+                <h1>Criar conta</h1>
+                <p>Preencha seus dados para começar.</p>
             </div>
-            <div>
-                <label class="block text-sm font-medium">Senha</label>
-                <input type="password" id="password" required class="w-full border rounded p-2 outline-none focus:border-green-500">
+
+            <form id="form-register" class="sertonibus-auth-form">
+                <div class="sertonibus-auth-field">
+                    <label for="name">Nome completo</label>
+                    <input type="text" id="name" required autocomplete="name" placeholder="Seu nome completo">
+                </div>
+
+                <div class="sertonibus-auth-field">
+                    <label for="username">Nome de usuário</label>
+                    <input type="text" id="username" required autocomplete="username" placeholder="Ex.: joao.silva">
+                </div>
+
+                <div class="sertonibus-auth-field">
+                    <label for="password">Senha</label>
+                    <div class="sertonibus-password-wrap">
+                        <input type="password" id="password" required minlength="7" autocomplete="new-password" placeholder="Mín. 7 caracteres, número e especial">
+                        <button type="button" class="sertonibus-password-toggle" data-password-toggle="password" aria-label="Mostrar senha" aria-pressed="false">👁</button>
+                    </div>
+                    <div id="password-strength" class="sertonibus-password-strength hidden" aria-live="polite">
+                        <div class="sertonibus-strength-track" aria-hidden="true">
+                            <div id="password-strength-bar"></div>
+                        </div>
+                        <div class="sertonibus-strength-meta">
+                            <span id="password-strength-label">Força da senha</span>
+                            <span id="password-strength-hint">Digite uma senha</span>
+                        </div>
+                    </div>
+                    <p id="password-error" class="sertonibus-inline-error hidden"></p>
+                </div>
+
+                <div class="sertonibus-auth-field">
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" required maxlength="14" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00">
+                    <p id="cpf-error" class="sertonibus-inline-error hidden"></p>
+                </div>
+
+                <div id="student-registration-field" class="sertonibus-auth-field">
+                    <label for="registration">Número de matrícula</label>
+                    <input type="text" id="registration" required maxlength="12" inputmode="numeric" pattern="[0-9]{12}" autocomplete="off" placeholder="Somente números — 12 dígitos">
+                    <p id="registration-hint" class="sertonibus-auth-hint">Obrigatório para cadastro de aluno.</p>
+                    <p id="registration-error" class="sertonibus-inline-error hidden"></p>
+                </div>
+
+                <div class="sertonibus-auth-field">
+                    <label for="role">Tipo de cadastro</label>
+                    <select id="role">
+                        <option value="student">Aluno / Passageiro</option>
+                        <option value="driver">Motorista</option>
+                    </select>
+                </div>
+
+                <!-- Cidade de origem — visível apenas para alunos -->
+                <div id="home-city-field" class="sertonibus-auth-field">
+                    <label for="home-city">Cidade de origem</label>
+                    <select id="home-city" required>
+                        <option value="">Selecione sua cidade...</option>
+                    </select>
+                    <p class="sertonibus-auth-hint">O ônibus da sua cidade aparecerá automaticamente.</p>
+                </div>
+
+                <!-- Cidade da rota — visível apenas para motoristas -->
+                <div id="route-city-field" class="sertonibus-auth-field hidden">
+                    <label for="route-city">Cidade que você atende</label>
+                    <select id="route-city">
+                        <option value="">Selecione a cidade da sua rota...</option>
+                    </select>
+                    <p class="sertonibus-auth-hint">Alunos desta cidade verão seu ônibus.</p>
+                </div>
+
+                <div id="driver-verification" class="sertonibus-auth-field hidden">
+                    <label for="driver-code">Código de autorização do motorista</label>
+                    <div class="sertonibus-password-wrap">
+                        <input type="password" id="driver-code" placeholder="Digite o código autorizado">
+                        <button type="button" class="sertonibus-password-toggle" data-password-toggle="driver-code" aria-label="Mostrar código" aria-pressed="false">👁</button>
+                    </div>
+                    <p class="sertonibus-auth-hint">Necessário para cadastro de motorista.</p>
+                </div>
+
+
+                <button type="submit" class="sertonibus-auth-submit">
+                    <span class="sertonibus-submit-label">Cadastrar</span>
+                    <span class="sertonibus-submit-loading" aria-hidden="true">
+                        <span class="sertonibus-spinner"></span>
+                        Criando conta...
+                    </span>
+                </button>
+            </form>
+
+            <div class="sertonibus-auth-footer">
+                <span>Já possui uma conta?</span>
+                <a href="login.html">Entrar</a>
             </div>
-            <div>
-                <label class="block text-sm font-medium">Perfil</label>
-                <select id="role" class="w-full border rounded p-2 outline-none focus:border-green-500">
-                    <option value="student">Estudante (Vou viajar)</option>
-                    <option value="driver">Motorista (Vou dirigir)</option>
-                </select>
-            </div>
-            <div id="driver-code-field" class="hidden">
-                <label class="block text-sm font-medium">Código de autorização do motorista</label>
-                <input type="password" id="driver-code" autocomplete="off" class="w-full border rounded p-2 outline-none focus:border-green-500">
-                <p class="text-xs text-gray-500 mt-1">Necessário para criar uma conta de motorista.</p>
-            </div>
-            <button type="submit" class="w-full bg-green-500 text-white font-bold py-2 rounded hover:bg-green-600">Cadastrar</button>
-        </form>
-        <div class="mt-4 text-center">
-            <a href="index.html" class="text-sm text-gray-500 hover:text-blue-500 underline">Voltar ao Menu</a>
-        </div>
-    </div>
-    <!-- Scripts separados por responsabilidade -->
+            <a href="index.html" class="sertonibus-auth-back">Voltar ao menu</a>
+        </section>
+    </main>
+
     <script src="js/database.js"></script>
+    <script src="js/ui.js"></script>
     <script src="js/auth.js"></script>
 </body>
 </html>
