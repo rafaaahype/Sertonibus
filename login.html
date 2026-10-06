@@ -7,26 +7,56 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
-        <h2 class="text-2xl font-bold text-center mb-6">Acessar Conta</h2>
-        <form id="form-login" class="space-y-4">
-            <div>
-                <label class="block text-sm font-medium">Usuário</label>
-                <input type="text" id="username" required class="w-full border rounded p-2 outline-none focus:border-blue-500">
+<body class="sertonibus-auth-page">
+    <main class="sertonibus-auth-shell">
+        <section class="sertonibus-auth-card" aria-label="Acesso ao Sertonibus">
+            <div class="sertonibus-auth-brand">
+                <div class="sertonibus-auth-mark">S</div>
+                <div>
+                    <span class="sertonibus-auth-kicker">SERTONIBUS</span>
+                    <p>Transporte universitário</p>
+                </div>
             </div>
-            <div>
-                <label class="block text-sm font-medium">Senha</label>
-                <input type="password" id="password" required class="w-full border rounded p-2 outline-none focus:border-blue-500">
+
+            <div class="sertonibus-auth-heading">
+                <span class="sertonibus-auth-eyebrow">Área segura</span>
+                <h1>Acessar conta</h1>
+                <p>Entre com seus dados para continuar.</p>
             </div>
-            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 rounded hover:bg-blue-700">Entrar</button>
-        </form>
-        <div class="mt-4 text-center">
-            <a href="index.html" class="text-sm text-gray-500 hover:text-blue-500 underline">Voltar ao Menu</a>
-        </div>
-    </div>
-    <!-- Scripts separados por responsabilidade -->
+
+            <form id="form-login" class="sertonibus-auth-form">
+                <div class="sertonibus-auth-field">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" required autocomplete="username" placeholder="Digite seu usuário">
+                </div>
+
+                <div class="sertonibus-auth-field">
+                    <label for="password">Senha</label>
+                    <div class="sertonibus-password-wrap">
+                        <input type="password" id="password" required autocomplete="current-password" placeholder="Digite sua senha">
+                        <button type="button" class="sertonibus-password-toggle" data-password-toggle="password" aria-label="Mostrar senha" aria-pressed="false">👁</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="sertonibus-auth-submit">
+                    <span class="sertonibus-submit-label">Entrar</span>
+                    <span class="sertonibus-submit-loading" aria-hidden="true">
+                        <span class="sertonibus-spinner"></span>
+                        Entrando...
+                    </span>
+                </button>
+            </form>
+
+            <div class="sertonibus-auth-footer">
+                <span>Primeiro acesso?</span>
+                <a href="register.html">Criar uma conta</a>
+            </div>
+            <a href="index.html" class="sertonibus-auth-back">Voltar ao menu</a>
+        </section>
+    </main>
+
     <script src="js/database.js"></script>
+    <script src="js/ui.js"></script>
     <script src="js/auth.js"></script>
 </body>
 </html>
