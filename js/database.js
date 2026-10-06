@@ -6,6 +6,14 @@ const DB_USERS = 'sertonibus_users';
 const DB_BOOKINGS = 'sertonibus_bookings';
 const DB_CURRENT_USER = 'sertonibus_logged_user';
 
+// Regra principal: só cabem 5 estudantes por ônibus
+const MAX_CAPACITY = 5;
+
+// Código exigido para criar uma conta de motorista (troque por um valor seu).
+// Atenção: como o projeto roda só no navegador, esse código fica visível no código-fonte.
+// Ele impede cadastros por engano ou curiosidade, mas não é segurança de verdade (isso exige um servidor).
+const DRIVER_ACCESS_CODE = 'SERTONIBUS-MOTORISTA';
+
 const DB = {
     // Retorna todos os usuários cadastrados
     getUsers: () => JSON.parse(localStorage.getItem(DB_USERS)) || [],

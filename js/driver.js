@@ -21,9 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const bus2Container = document.getElementById('bus2-container');
     const alertExtraBus = document.getElementById('alert-extra-bus');
 
-    // A Regra principal: Só cabem 5 estudantes por ônibus
-    const MAX_CAPACITY = 5;
-
     // 3. Função que carrega e divide os passageiros
     function renderDashboard() {
         const day = filterDay.value;

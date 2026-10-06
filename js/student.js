@@ -46,9 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função global para o botão "Cancelar" chamar
     window.cancelBooking = (id) => {
-        let bookings = DB.getBookings();
-        bookings = bookings.filter(b => b.id !== id); // Remove pelo ID
-        DB.saveBookings(bookings);
+        const bookings = DB.getBookings();
+
+        // Só permite cancelar uma viagem que seja deste aluno
+        const booking = bookings.find(b => b.id === id && b.studentId === user.id);
+        if (!booking) return;
+
+        // Pede confirmação antes de apagar
+        const confirmed = confirm(`Deseja realmente cancelar a viagem de ${booking.day}, ${booking.time}?`);
+        if (!confirmed) return;
+
+        DB.saveBookings(bookings.filter(b => b.id !== id)); // Remove pelo ID
         renderBookings(); // Atualiza a tela
     };
 
@@ -64,6 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const alreadyBooked = bookings.find(b => b.studentId === user.id && b.day === day && b.time === time);
         if(alreadyBooked) {
             alert('Você já possui uma vaga garantida para este dia e horário.');
+            return;
+        }
+
+        // Regra de negócio: não deixar agendar se o ônibus daquele dia e horário já estiver lotado
+        const bookedSeats = bookings.filter(b => b.day === day && b.time === time).length;
+        if (bookedSeats >= MAX_CAPACITY) {
+            alert(`O ônibus de ${day}, ${time}, já está lotado: todas as ${MAX_CAPACITY} vagas foram preenchidas. Escolha outro dia ou horário.`);
             return;
         }
 

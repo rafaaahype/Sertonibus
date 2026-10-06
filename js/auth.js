@@ -1,6 +1,9 @@
 // auth.js
 // Este arquivo lida exclusivamente com a lógica de Cadastro e Login
 
+// Remove espaços das pontas (inclusive espaços invisíveis, como o de largura zero)
+const clean = (text) => text.replace(/[\u200B-\u200D\uFEFF]/g, '').trim();
+
 document.addEventListener('DOMContentLoaded', () => {
     const formRegister = document.getElementById('form-register');
     const formLogin = document.getElementById('form-login');
@@ -9,19 +12,66 @@ document.addEventListener('DOMContentLoaded', () => {
     // LÓGICA DE CADASTRO
     // ==========================================
     if (formRegister) {
+        const roleSelect = document.getElementById('role');
+        const driverCodeField = document.getElementById('driver-code-field');
+        const driverCodeInput = document.getElementById('driver-code');
+
+        // O campo do código só aparece (e só é obrigatório) quando o perfil é Motorista
+        const syncDriverCodeField = () => {
+            const isDriver = roleSelect.value === 'driver';
+            driverCodeField.classList.toggle('hidden', !isDriver);
+            driverCodeInput.required = isDriver;
+            if (!isDriver) driverCodeInput.value = '';
+        };
+        roleSelect.addEventListener('change', syncDriverCodeField);
+        syncDriverCodeField();
+
         formRegister.addEventListener('submit', (e) => {
             e.preventDefault(); // Impede o reload da página
-            
-            const name = document.getElementById('name').value;
-            const username = document.getElementById('username').value;
+
+            // Nome sem espaços nas pontas e sem espaços duplicados no meio
+            const name = clean(document.getElementById('name').value).replace(/\s+/g, ' ');
+            const username = clean(document.getElementById('username').value);
             const password = document.getElementById('password').value;
-            const role = document.getElementById('role').value;
+            const role = roleSelect.value;
+
+            if (!name) {
+                alert('Informe seu nome completo. Ele não pode ficar vazio nem conter apenas espaços.');
+                document.getElementById('name').focus();
+                return;
+            }
+
+            if (!username) {
+                alert('Informe um nome de usuário. Ele não pode ficar vazio nem conter apenas espaços.');
+                document.getElementById('username').focus();
+                return;
+            }
+
+            if (!clean(password)) {
+                alert('A senha não pode conter apenas espaços.');
+                document.getElementById('password').focus();
+                return;
+            }
+
+            // Só existem dois perfis válidos
+            if (role !== 'student' && role !== 'driver') {
+                alert('Perfil inválido.');
+                return;
+            }
+
+            // Motorista precisa do código de autorização
+            if (role === 'driver' && driverCodeInput.value.trim() !== DRIVER_ACCESS_CODE) {
+                alert('Código de autorização inválido. Só é possível criar conta de motorista com o código correto.');
+                driverCodeInput.focus();
+                return;
+            }
 
             let users = DB.getUsers();
-            
-            // Verifica se o usuário já existe
-            if (users.find(u => u.username === username)) {
+
+            // Verifica se o usuário já existe (ignorando espaços nas pontas, inclusive em contas antigas)
+            if (users.find(u => clean(u.username) === username)) {
                 alert('Este nome de usuário já existe! Escolha outro.');
+                document.getElementById('username').focus();
                 return;
             }
 
@@ -47,13 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
         formLogin.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            const username = document.getElementById('username').value;
+            const username = clean(document.getElementById('username').value);
             const password = document.getElementById('password').value;
 
             let users = DB.getUsers();
             
-            // Procura o usuário que bate com login e senha
-            let user = users.find(u => u.username === username && u.password === password);
+            // Procura o usuário que bate com login e senha (espaços nas pontas do usuário são ignorados)
+            let user = users.find(u => clean(u.username) === username && u.password === password);
 
             if (user) {
                 // Guarda quem logou
