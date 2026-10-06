@@ -1,6 +1,6 @@
 // driver.js
 // Lida com a visualização dos passageiros por direção (Ida / Volta),
-// a definição de vagas e a rota regional do motorista.
+// a definição de vagas e a rota regional dinâmica do motorista.
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Verificação de Segurança
@@ -14,10 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('user-display').innerText = user.name;
     document.getElementById('btn-logout').addEventListener('click', DB.logout);
 
-    const routeCity   = String(user.routeCity || user.origin || '').trim();
-    const routeLabel  = document.getElementById('route-label');
+    const filterRoute = document.getElementById('filter-route');
     const filterDay   = document.getElementById('filter-day');
     const filterTime  = document.getElementById('filter-time');
+    const routeLabel  = document.getElementById('route-label');
 
     const busOutboundList        = document.getElementById('bus-outbound-list');
     const busReturnList          = document.getElementById('bus-return-list');
@@ -40,11 +40,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const publicProfileRole         = document.getElementById('public-profile-role');
     const btnClosePublicProfile     = document.getElementById('btn-close-public-profile');
 
-    // Banner de rota
-    if (routeLabel) {
-        routeLabel.textContent = routeCity
-            ? `${routeCity} ↔ ${DB.DESTINATION_CITY}`
-            : 'Rota não configurada — atualize seu perfil.';
+    // Popula o seletor de rotas para que o motorista possa alternar a linha atendida
+    if (filterRoute && DB.ROUTE_CITIES) {
+        filterRoute.innerHTML = '';
+        DB.ROUTE_CITIES.forEach(city => {
+            const opt = document.createElement('option');
+            opt.value = city;
+            opt.textContent = (city === DB.DESTINATION_CITY)
+                ? `${city} (Linha Municipal)`
+                : `${city} ↔ ${DB.DESTINATION_CITY}`;
+            filterRoute.appendChild(opt);
+        });
+
+        const initialRoute = user.routeCity || user.origin || DB.ROUTE_CITIES[0];
+        if (Array.from(filterRoute.options).some(o => o.value === initialRoute)) {
+            filterRoute.value = initialRoute;
+        }
+    }
+
+    function getSelectedRoute() {
+        return filterRoute?.value || user.routeCity || user.origin || DB.ROUTE_CITIES[0];
+    }
+
+    function updateRouteBanner() {
+        const activeRoute = getSelectedRoute();
+        if (routeLabel) {
+            routeLabel.textContent = (activeRoute === DB.DESTINATION_CITY)
+                ? `${activeRoute} (Linha Municipal / Polo)`
+                : `${activeRoute} ↔ ${DB.DESTINATION_CITY}`;
+        }
     }
 
     function openStudentProfile(studentId) {
@@ -80,9 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target === publicProfileModal) closeStudentProfile();
     });
 
-    // Carrega no formulário a configuração salva para o turno selecionado
+    // Carrega no formulário a configuração salva para a rota e turno selecionados
     function loadConfigForm() {
-        const cfg = DB.getShiftConfig(routeCity, filterDay.value, filterTime.value);
+        const activeRoute = getSelectedRoute();
+        const cfg = DB.getShiftConfig(activeRoute, filterDay.value, filterTime.value);
         inputCapacity.value    = cfg.capacity;
         inputDescription.value = cfg.description;
     }
@@ -91,14 +116,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Renderiza o painel: passageiros separados por direção (Ida / Volta)
     // ------------------------------------------------------------------
     function renderDashboard() {
+        const activeRoute = getSelectedRoute();
         const day  = filterDay.value;
         const time = filterTime.value;
 
-        const { capacity, description } = DB.getShiftConfig(routeCity, day, time);
+        updateRouteBanner();
+
+        const { capacity, description } = DB.getShiftConfig(activeRoute, day, time);
 
         // Filtra agendamentos vinculados a esta rota (moradores da rota ou de Cajazeiras usando esta linha)
-        const allBookings   = DB.getBookings().filter(b =>
-            (b.routeCity === routeCity || (!b.routeCity && b.homeCity === routeCity)) &&
+        const allBookings = DB.getBookings().filter(b =>
+            (b.routeCity === activeRoute || (!b.routeCity && b.homeCity === activeRoute)) &&
             b.day === day &&
             b.time === time
         );
@@ -143,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const referenceHTML = b.address && b.address.reference
                 ? `<span class="block text-xs text-gray-500">Ref.: ${DB.escapeHTML(b.address.reference)}</span>`
                 : '';
-            const originBadge = (b.homeCity && b.homeCity !== routeCity)
+            const originBadge = (b.homeCity && b.homeCity !== activeRoute)
                 ? `<span class="inline-block text-[11px] font-semibold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded ml-1">Origem: ${DB.escapeHTML(b.homeCity)}</span>`
                 : '';
 
@@ -187,23 +215,22 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (!routeCity) {
-            alert('Sua conta não possui cidade de rota definida. Recadastre-se com uma cidade.');
-            return;
-        }
-
+        const activeRoute = getSelectedRoute();
         const day         = filterDay.value;
         const time        = filterTime.value;
-        const currentConfig = DB.getShiftConfig(routeCity, day, time);
+        const currentConfig = DB.getShiftConfig(activeRoute, day, time);
         if (currentConfig.driverId && String(currentConfig.driverId) !== String(user.id)) {
-            alert('Este turno já está associado a outro motorista.');
+            alert('Este turno para esta rota já está associado a outro motorista.');
             return;
         }
 
-        DB.saveShiftConfig(routeCity, day, time, {
+        DB.saveShiftConfig(activeRoute, day, time, {
             capacity,
             description: inputDescription.value.trim().slice(0, 200)
         });
+
+        // Persiste a rota ativa no perfil do motorista
+        DB.updateUserProfile(user.id, { routeCity: activeRoute });
 
         const btn     = formConfig.querySelector('button[type="submit"]');
         const oldText = btn.innerText;
@@ -218,8 +245,9 @@ document.addEventListener('DOMContentLoaded', () => {
         renderDashboard();
     }
 
-    filterDay.addEventListener('change',  onShiftChange);
-    filterTime.addEventListener('change', onShiftChange);
+    filterRoute?.addEventListener('change', onShiftChange);
+    filterDay.addEventListener('change',    onShiftChange);
+    filterTime.addEventListener('change',   onShiftChange);
 
     // Renderiza na primeira carga
     onShiftChange();
