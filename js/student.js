@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         driverPreviewName.textContent   = selectedDriver.name || 'Motorista';
         driverPreviewOrigin.textContent = selectedDriver.routeCity
-            ? `Rota: ${selectedDriver.routeCity} ↔ ${DB.DESTINATION_CITY}`
+            ? (selectedDriver.routeCity === DB.DESTINATION_CITY ? `Linha: ${selectedDriver.routeCity} (Municipal)` : `Rota: ${selectedDriver.routeCity} ↔ ${DB.DESTINATION_CITY}`)
             : (selectedDriver.origin ? `Origem: ${selectedDriver.origin}` : 'Perfil sem localização informada.');
         btnViewDriver.classList.remove('hidden');
     }
@@ -177,8 +177,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!selectedDriver) return;
         publicProfileName.textContent   = selectedDriver.name || '-';
         publicProfileOrigin.textContent = selectedDriver.routeCity
-            ? `${selectedDriver.routeCity} ↔ ${DB.DESTINATION_CITY}`
+            ? (selectedDriver.routeCity === DB.DESTINATION_CITY ? selectedDriver.routeCity : `${selectedDriver.routeCity} ↔ ${DB.DESTINATION_CITY}`)
             : (selectedDriver.origin || 'Não informado');
+
         publicProfileRole.textContent = 'Motorista';
         if (selectedDriver.profilePhoto) {
             publicProfilePhoto.src = selectedDriver.profilePhoto;
